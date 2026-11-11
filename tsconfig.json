@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",              // modern JavaScript features
+    "module": "nodenext",            // how Node loads modules
+    "moduleResolution": "nodenext",  // how imports are found (matches "module")
+    "strict": true,                  // strictest type checks; catches the most bugs
+    "esModuleInterop": true,         // allows `import x from 'pkg'` for older packages
+    "skipLibCheck": true,            // don't type-check node_modules (faster)
+    "noEmit": true,                  // check only, never write .js files
+    "types": ["node"]                // include Node's types (process.env, etc.)
+  },
+  "include": ["**/*.ts"],            // check every .ts file (tests, pages, config)
+  "exclude": ["node_modules", "playwright-report", "test-results"]
+}

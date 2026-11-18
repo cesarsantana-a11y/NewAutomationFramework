@@ -1,31 +1,29 @@
 import {Locator, Page} from "@playwright/test";
-import {HomePage} from "./HomePage";
 
 export class LoginPage {
     readonly page: Page;
-    readonly LoginPageHeading: Locator;
-    readonly LoginEmailInput: Locator;
-    readonly LoginPasswordInput: Locator;
-    readonly ClickLoginButton: Locator;
-    readonly LoginErrorMessage: Locator;
+    readonly loginPageHeading: Locator;
+    readonly loginEmailInput: Locator;
+    readonly loginPasswordInput: Locator;
+    readonly loginButton: Locator;
+    readonly loginErrorMessage: Locator;
 
     constructor (page: Page){
         this.page = page;
-        this.LoginPageHeading = page.getByRole('heading', {name:'Login to your account'});
-        this.LoginEmailInput = page.getByTestId('login-email');
-        this.LoginPasswordInput = page.getByTestId('login-password');
-        this.ClickLoginButton = page.getByTestId('login-button');
-        this.LoginErrorMessage = page.getByText('Your email or password is incorrect!')
+        this.loginPageHeading = page.getByRole('heading', {name:'Login to your account'});
+        this.loginEmailInput = page.getByTestId('login-email');
+        this.loginPasswordInput = page.getByTestId('login-password');
+        this.loginButton = page.getByTestId('login-button');
+        this.loginErrorMessage = page.getByText('Your email or password is incorrect!')
     }
 
-    async openLoginPage() {
-        const homePage = new HomePage(this.page);
-        await homePage.openHomePage();
-        await homePage.clickLoginLink();
+       async goto() {
+        await this.page.goto('/login');
     }
+
     async login(loginEmail: string, loginPassword: string) {
-        await this.LoginEmailInput.fill(loginEmail);
-        await this.LoginPasswordInput.fill(loginPassword);
-        await this.ClickLoginButton.click();
+        await this.loginEmailInput.fill(loginEmail);
+        await this.loginPasswordInput.fill(loginPassword);
+        await this.loginButton.click();
     }
 }
